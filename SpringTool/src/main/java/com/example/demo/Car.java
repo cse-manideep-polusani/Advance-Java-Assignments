@@ -1,6 +1,10 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 import org.springframework.context.annotation.Scope;
 
 @Component
@@ -13,5 +17,15 @@ public class Car implements Vechile{
 	@Override
 	public void run() {
 		System.out.println("Car running..");
+	}
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("Bean  Initialized");
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		System.out.println("Bean destroyed");
 	}
 }
