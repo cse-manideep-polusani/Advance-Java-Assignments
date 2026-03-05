@@ -30,7 +30,7 @@ public class WebConfig {
 		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/customerdbs");
 		ds.setUsername("root");
-		ds.setPassword("root");
+		ds.setPassword("Mani@0369");
 		return ds;
 	}
 
