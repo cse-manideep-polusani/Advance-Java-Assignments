@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Form</title>
+</head>
+<body>
+
+<h2>Customer Form</h2>
+
+<form th:action="@{/saveCustomer}" th:object="${customer}" method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    Name: <input type="text" th:field="*{name}" /><br><br>
+
+    City: <input type="text" th:field="*{city}" /><br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
