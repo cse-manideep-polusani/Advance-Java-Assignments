@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Store</title>
+</head>
+<body>
+
+<h2>Book Search</h2>
+
+<!-- Search by Author -->
+<h3>Search by Author</h3>
+<input type="text" id="author" placeholder="Enter author name">
+<button onclick="getByAuthor()">Search</button>
+
+<hr>
+
+<!-- Search by Genre -->
+<h3>Search by Genre</h3>
+<input type="text" id="genre" placeholder="Enter genre">
+<button onclick="getByGenre()">Search</button>
+
+<hr>
+
+<!-- Price Range -->
+<h3>Search by Price Range</h3>
+<input type="number" id="minPrice" placeholder="Min Price">
+<input type="number" id="maxPrice" placeholder="Max Price">
+<button onclick="getByPriceRange()">Search</button>
+
+<hr>
+
+<!-- Latest Books -->
+<h3>Latest Books</h3>
+<button onclick="getLatest()">Show Latest</button>
+
+<hr>
+
+<h3>Results</h3>
+<table border="1" id="resultTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Price</th>
+            <th>Published Date</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+
+function displayBooks(books) {
+    const tbody = document.querySelector("#resultTable tbody");
+    tbody.innerHTML = "";
+
+    books.forEach(book => {
+        const row = `
+            <tr>
+                <td>${book.id}</td>
+                <td>${book.title}</td>
+                <td>${book.author}</td>
+                <td>${book.genre}</td>
+                <td>${book.price}</td>
+                <td>${book.publishedDate}</td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+}
+
+function getByAuthor() {
+    const author = document.getElementById("author").value;
+
+    fetch(`/api/books/author?author=${author}`)
+        .then(response => response.json())
+        .then(data => displayBooks(data));
+}
+
+function getByGenre() {
+    const genre = document.getElementById("genre").value;
+
+    fetch(`/api/books/genre?genre=${genre}`)
+        .then(response => response.json())
+        .then(data => displayBooks(data));
+}
+
+function getByPriceRange() {
+    const min = document.getElementById("minPrice").value;
+    const max = document.getElementById("maxPrice").value;
+
+    fetch(`/api/books/price-range?minPrice=${min}&maxPrice=${max}`)
+        .then(response => response.json())
+        .then(data => displayBooks(data));
+}
+
+function getLatest() {
+    fetch(`/api/books/latest?page=0&size=5`)
+        .then(response => response.json())
+        .then(data => displayBooks(data.content)); // Page object
+}
+
+</script>
+
+</body>
+</html>	

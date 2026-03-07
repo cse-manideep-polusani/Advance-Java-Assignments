@@ -1,4 +1,4 @@
-package com.payment.demo;
+package com.notification.demo;
 
 
 import org.springframework.stereotype.Component;

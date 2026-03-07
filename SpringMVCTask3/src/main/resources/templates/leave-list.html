@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Leave Requests</title>
+</head>
+<body>
+
+<h2>All Leave Requests</h2>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Employee</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
+    </tr>
+
+    <tr th:each="leave : ${leaveList}">
+        <td th:text="${leave.id}"></td>
+        <td th:text="${leave.employee.name}"></td>
+        <td th:text="${leave.leaveType != null ? leave.leaveType.typeName : 'Not Assigned'}"></td>
+        <td th:text="${leave.startDate}"></td>
+        <td th:text="${leave.endDate}"></td>
+        <td th:text="${leave.status}"></td>
+    </tr>
+
+</table>
+
+<br>
+<a href="/leave/apply">Apply New Leave</a>
+
+</body>
+</html>
